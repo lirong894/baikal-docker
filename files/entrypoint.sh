@@ -5,6 +5,8 @@ set -e
 # Ensure Nginx can write to the data directories (crucial for mounted volumes)
 if [ -d "/var/www/baikal/Specific" ]; then
     chown -R nginx:nginx /var/www/baikal/Specific
+    mkdir /var/www/baikal/Specific/db
+    chown -R nginx:nginx /var/www/baikal/Specific/db
 fi
 
 if [ -d "/var/www/baikal/config" ]; then
