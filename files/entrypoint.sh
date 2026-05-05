@@ -8,6 +8,10 @@ if [ -d "/var/www/baikal/Specific" ]; then
     mkdir /var/www/baikal/Specific/db
     chown -R nginx:nginx /var/www/baikal/Specific/db
 fi
+if [ ! -d "/var/www/baikal/Specific/db" ]; then
+    mkdir /var/www/baikal/Specific/db
+    chown -R nginx:nginx /var/www/baikal/Specific/db
+fi
 
 if [ -d "/var/www/baikal/config" ]; then
     chown -R nginx:nginx /var/www/baikal/config
