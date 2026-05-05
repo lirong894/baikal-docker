@@ -27,18 +27,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
-      - name: Read Baikal version from Dockerfile
-        id: versions
-        shell: bash
-        run: |
-          set -euo pipefail
-          BAIKAL_VERSION="$(grep -E '^ENV[[:space:]]+BAIKAL_VERSION=' Dockerfile | head -n1 | cut -d= -f2)"
-          if [ -z "${BAIKAL_VERSION}" ]; then
-            echo "Could not determine BAIKAL_VERSION from Dockerfile" >&2
-            exit 1
-          fi
-          echo "baikal=${BAIKAL_VERSION}" >> "$GITHUB_OUTPUT"
-
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v4
 
@@ -59,8 +47,7 @@ jobs:
           images: ${{ env.IMAGE_NAME }}
           tags: |
             # Main tag: Baikal version (this is what you want)
-            type=raw,value=${{ steps.versions.outputs.baikal }}
-            type=raw,value=latest,enable={{is_default_branch}}
+            type=raw,value=latest
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v7
