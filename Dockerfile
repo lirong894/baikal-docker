@@ -41,7 +41,9 @@ RUN apk add --no-cache \
     php85-pdo \
     php85-pdo_pgsql \
     php85-pgsql \
-    php85-zlib
+    php85-zlib \
+    php85-pdo_sqlite \
+    php85-sqlite3
 
 # Create Directories & User Setup
 RUN mkdir -p /var/www/baikal/Specific /var/www/baikal/config /run/nginx /run/php \
