@@ -4,14 +4,14 @@ FROM alpine AS builder
 # ENV BAIKAL_VERSION=0.11.1
 WORKDIR /app
 RUN apk add --no-cache unzip curl \
-    && LATEST_TAG=$(curl -s https://api.github.com/repos/sabre-io/baikal/tags | \
+    && BAIKAL_VERSION=$(curl -s https://api.github.com/repos/sabre-io/baikal/tags | \
     grep -o '"name": "[^"]*' | \
     cut -d'"' -f4 | \
     grep -v -E "alpha|beta|rc" | \
     sort -V | \
     tail -n 1) \
     && echo "Downloading Baikal $LATEST_TAG" \
-    && curl -L -o baikal.zip "https://github.com/sabre-io/baikal/releases/download/baikal-$LATEST_TAG.zip" \
+    && curl -L -o baikal.zip "https://github.com/sabre-io/baikal/releases/download/$BAIKAL_VERSION/baikal-$BAIKAL_VERSION.zip" \
     && unzip -q baikal.zip \
     && rm baikal.zip
 # RUN apk add --no-cache unzip curl \
